@@ -17,13 +17,17 @@ import (
 	"gorm.io/gorm"
 )
 
-var commonGroupCol string
-var commonKeyCol string
-var commonTrueVal string
-var commonFalseVal string
+var (
+	commonGroupCol string
+	commonKeyCol   string
+	commonTrueVal  string
+	commonFalseVal string
+)
 
-var logKeyCol string
-var logGroupCol string
+var (
+	logKeyCol   string
+	logGroupCol string
+)
 
 func initCol() {
 	// init common column names
@@ -58,7 +62,7 @@ func initCol() {
 		}
 	}
 	// log sql type and database type
-	//common.SysLog("Using Log SQL Type: " + common.LogSqlType)
+	// common.SysLog("Using Log SQL Type: " + common.LogSqlType)
 }
 
 var DB *gorm.DB
@@ -67,7 +71,7 @@ var LOG_DB *gorm.DB
 
 func createRootAccountIfNeed() error {
 	var user User
-	//if user.Status != common.UserStatusEnabled {
+	// if user.Status != common.UserStatusEnabled {
 	if err := DB.First(&user).Error; err != nil {
 		common.SysLog("no user exists, create a root user for you: username is root, password is 123456")
 		hashedPassword, err := common.Password2Hash("123456")
@@ -297,7 +301,6 @@ func migrateDB() error {
 }
 
 func migrateDBFast() error {
-
 	var wg sync.WaitGroup
 
 	migrations := []struct {
@@ -586,7 +589,6 @@ func CloseDB() error {
 // Chinese-capable charsets (utf8mb4, utf8, gbk, big5, gb18030) and panics otherwise.
 func checkMySQLChineseSupport(db *gorm.DB) error {
 	// 仅检测：当前库默认字符集/排序规则 + 各表的排序规则（隐含字符集）
-
 	// Read current schema defaults
 	var schemaCharset, schemaCollation string
 	err := db.Raw("SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = DATABASE()").Row().Scan(&schemaCharset, &schemaCollation)
