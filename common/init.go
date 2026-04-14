@@ -28,6 +28,7 @@ func printHelp() {
 	fmt.Println("Usage: newapi [--port <port>] [--log-dir <log directory>] [--version] [--help]")
 }
 
+// TODO: 初始化环境 学习到了这里
 func InitEnv() {
 	flag.Parse()
 
@@ -71,7 +72,7 @@ func InitEnv() {
 			log.Fatal(err)
 		}
 		if _, err := os.Stat(*LogDir); os.IsNotExist(err) {
-			err = os.Mkdir(*LogDir, 0777)
+			err = os.Mkdir(*LogDir, 0o777)
 			if err != nil {
 				log.Fatal(err)
 			}

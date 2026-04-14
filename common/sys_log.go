@@ -14,6 +14,7 @@ import (
 // acquire Lock when swapping writers and closing old files.
 var LogWriterMu sync.RWMutex
 
+// 系统日志
 func SysLog(s string) {
 	t := time.Now()
 	LogWriterMu.RLock()

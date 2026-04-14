@@ -24,12 +24,12 @@ import (
 	"github.com/QuantumNous/new-api/service"
 	_ "github.com/QuantumNous/new-api/setting/performance_setting"
 	"github.com/QuantumNous/new-api/setting/ratio_setting"
+	"github.com/joho/godotenv"
 
 	"github.com/bytedance/gopkg/util/gopool"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 
 	_ "net/http/pprof"
 )
@@ -163,7 +163,7 @@ func main() {
 		})
 	}))
 	// This will cause SSE not to work!!!
-	//server.Use(gzip.Gzip(gzip.DefaultCompression))
+	// server.Use(gzip.Gzip(gzip.DefaultCompression))
 	server.Use(middleware.RequestId())
 	server.Use(middleware.PoweredBy())
 	server.Use(middleware.I18n())
@@ -184,7 +184,7 @@ func main() {
 
 	// 设置路由
 	router.SetRouter(server, buildFS, indexPage)
-	var port = os.Getenv("PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = strconv.Itoa(*common.Port)
 	}
@@ -239,9 +239,13 @@ func InjectGoogleAnalytics() {
 	indexPage = bytes.ReplaceAll(indexPage, []byte("<!--Google Analytics-->\n"), []byte(analyticsInject))
 }
 
+// 初始化资源
 func InitResources() error {
-	// Initialize resources here if needed
-	// This is a placeholder function for future resource initialization
+	// 如果需要，请在此处初始化资源。
+	// 这是一个占位函数，用于将来初始化资源
+
+	// 读取'.env'中的变量, 并加载到Go进程环境变量中
+	// 后续可以使用os.Getenv("PORT")读取变量
 	err := godotenv.Load(".env")
 	if err != nil {
 		if common.DebugEnabled {
@@ -249,7 +253,7 @@ func InitResources() error {
 		}
 	}
 
-	// 加载环境变量
+	// 初始化环境
 	common.InitEnv()
 
 	logger.SetupLogger()
