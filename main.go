@@ -43,6 +43,7 @@ var indexPage []byte
 func main() {
 	startTime := time.Now()
 
+	// 初始化系统资源(未读完, 先捋清脉络, 回头再来啃)
 	err := InitResources()
 	if err != nil {
 		common.FatalLog("failed to initialize resources: " + err.Error())
@@ -183,6 +184,7 @@ func main() {
 	InjectGoogleAnalytics()
 
 	// 设置路由
+	// TODO 学到了这里
 	router.SetRouter(server, buildFS, indexPage)
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -256,13 +258,16 @@ func InitResources() error {
 	// 初始化环境
 	common.InitEnv()
 
+	// 设置日志
 	logger.SetupLogger()
 
-	// Initialize model settings
+	// 初始化模型比例设置(后面再看)
 	ratio_setting.InitRatioSettings()
 
+	// 初始化http客户端
 	service.InitHttpClient()
 
+	// 初始化token编码器
 	service.InitTokenEncoders()
 
 	// Initialize SQL Database

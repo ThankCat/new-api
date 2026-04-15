@@ -10,124 +10,159 @@ import (
 	"github.com/google/uuid"
 )
 
-var StartTime = time.Now().Unix() // unit: second
-var Version = "v0.0.0"            // this hard coding will be replaced automatically when building, no need to manually change
-var SystemName = "New API"
-var Footer = ""
-var Logo = ""
-var TopUpLink = ""
+var (
+	StartTime  = time.Now().Unix() // unit: second
+	Version    = "v0.0.0"          // 此硬编码将在构建时自动替换，无需手动更改。
+	SystemName = "New API"
+	Footer     = ""
+	Logo       = ""
+	TopUpLink  = ""
+)
 
 // var ChatLink = ""
 // var ChatLink2 = ""
-var QuotaPerUnit = 500 * 1000.0 // $0.002 / 1K tokens
-// 保留旧变量以兼容历史逻辑，实际展示由 general_setting.quota_display_type 控制
-var DisplayInCurrencyEnabled = true
-var DisplayTokenStatEnabled = true
-var DrawingEnabled = true
-var TaskEnabled = true
-var DataExportEnabled = true
-var DataExportInterval = 5         // unit: minute
-var DataExportDefaultTime = "hour" // unit: minute
-var DefaultCollapseSidebar = false // default value of collapse sidebar
+var (
+	QuotaPerUnit = 500 * 1000.0 // $0.002 / 1K tokens
+	// 保留旧变量以兼容历史逻辑，实际展示由 general_setting.quota_display_type 控制
+	DisplayInCurrencyEnabled = true
+	DisplayTokenStatEnabled  = true
+	DrawingEnabled           = true
+	TaskEnabled              = true
+	DataExportEnabled        = true
+	DataExportInterval       = 5      // unit: minute
+	DataExportDefaultTime    = "hour" // unit: minute
+	DefaultCollapseSidebar   = false  // default value of collapse sidebar
+)
 
 // Any options with "Secret", "Token" in its key won't be return by GetOptions
 
-var SessionSecret = uuid.New().String()
-var CryptoSecret = uuid.New().String()
+var (
+	SessionSecret = uuid.New().String()
+	CryptoSecret  = uuid.New().String()
+)
 
-var OptionMap map[string]string
-var OptionMapRWMutex sync.RWMutex
+var (
+	OptionMap        map[string]string
+	OptionMapRWMutex sync.RWMutex
+)
 
-var ItemsPerPage = 10
-var MaxRecentItems = 1000
+var (
+	ItemsPerPage   = 10
+	MaxRecentItems = 1000
+)
 
-var PasswordLoginEnabled = true
-var PasswordRegisterEnabled = true
-var EmailVerificationEnabled = false
-var GitHubOAuthEnabled = false
-var LinuxDOOAuthEnabled = false
-var WeChatAuthEnabled = false
-var TelegramOAuthEnabled = false
-var TurnstileCheckEnabled = false
-var RegisterEnabled = true
+var (
+	PasswordLoginEnabled     = true
+	PasswordRegisterEnabled  = true
+	EmailVerificationEnabled = false
+	GitHubOAuthEnabled       = false
+	LinuxDOOAuthEnabled      = false
+	WeChatAuthEnabled        = false
+	TelegramOAuthEnabled     = false
+	TurnstileCheckEnabled    = false
+	RegisterEnabled          = true
+)
 
-var EmailDomainRestrictionEnabled = false // 是否启用邮箱域名限制
-var EmailAliasRestrictionEnabled = false  // 是否启用邮箱别名限制
-var EmailDomainWhitelist = []string{
-	"gmail.com",
-	"163.com",
-	"126.com",
-	"qq.com",
-	"outlook.com",
-	"hotmail.com",
-	"icloud.com",
-	"yahoo.com",
-	"foxmail.com",
-}
+var (
+	EmailDomainRestrictionEnabled = false // 是否启用邮箱域名限制
+	EmailAliasRestrictionEnabled  = false // 是否启用邮箱别名限制
+	EmailDomainWhitelist          = []string{
+		"gmail.com",
+		"163.com",
+		"126.com",
+		"qq.com",
+		"outlook.com",
+		"hotmail.com",
+		"icloud.com",
+		"yahoo.com",
+		"foxmail.com",
+	}
+)
 var EmailLoginAuthServerList = []string{
 	"smtp.sendcloud.net",
 	"smtp.azurecomm.net",
 }
 
-var DebugEnabled bool
-var MemoryCacheEnabled bool
+var (
+	DebugEnabled       bool
+	MemoryCacheEnabled bool
+)
 
 var LogConsumeEnabled = true
 
-var TLSInsecureSkipVerify bool
-var InsecureTLSConfig = &tls.Config{InsecureSkipVerify: true}
+var (
+	TLSInsecureSkipVerify bool
+	InsecureTLSConfig     = &tls.Config{InsecureSkipVerify: true}
+)
 
-var SMTPServer = ""
-var SMTPPort = 587
-var SMTPSSLEnabled = false
-var SMTPForceAuthLogin = false
-var SMTPAccount = ""
-var SMTPFrom = ""
-var SMTPToken = ""
+var (
+	SMTPServer         = ""
+	SMTPPort           = 587
+	SMTPSSLEnabled     = false
+	SMTPForceAuthLogin = false
+	SMTPAccount        = ""
+	SMTPFrom           = ""
+	SMTPToken          = ""
+)
 
-var GitHubClientId = ""
-var GitHubClientSecret = ""
-var LinuxDOClientId = ""
-var LinuxDOClientSecret = ""
-var LinuxDOMinimumTrustLevel = 0
+var (
+	GitHubClientId           = ""
+	GitHubClientSecret       = ""
+	LinuxDOClientId          = ""
+	LinuxDOClientSecret      = ""
+	LinuxDOMinimumTrustLevel = 0
+)
 
-var WeChatServerAddress = ""
-var WeChatServerToken = ""
-var WeChatAccountQRCodeImageURL = ""
+var (
+	WeChatServerAddress         = ""
+	WeChatServerToken           = ""
+	WeChatAccountQRCodeImageURL = ""
+)
 
-var TurnstileSiteKey = ""
-var TurnstileSecretKey = ""
+var (
+	TurnstileSiteKey   = ""
+	TurnstileSecretKey = ""
+)
 
-var TelegramBotToken = ""
-var TelegramBotName = ""
+var (
+	TelegramBotToken = ""
+	TelegramBotName  = ""
+)
 
-var QuotaForNewUser = 0
-var QuotaForInviter = 0
-var QuotaForInvitee = 0
-var ChannelDisableThreshold = 5.0
-var AutomaticDisableChannelEnabled = false
-var AutomaticEnableChannelEnabled = false
-var QuotaRemindThreshold = 1000
-var PreConsumedQuota = 500
+var (
+	QuotaForNewUser                = 0
+	QuotaForInviter                = 0
+	QuotaForInvitee                = 0
+	ChannelDisableThreshold        = 5.0
+	AutomaticDisableChannelEnabled = false
+	AutomaticEnableChannelEnabled  = false
+	QuotaRemindThreshold           = 1000
+	PreConsumedQuota               = 500
+)
 
 var RetryTimes = 0
 
-//var RootUserEmail = ""
-
+// var RootUserEmail = ""
 var IsMasterNode bool
 
-var requestInterval int
-var RequestInterval time.Duration
+var (
+	requestInterval int
+	RequestInterval time.Duration
+)
 
 var SyncFrequency int // unit is second
 
-var BatchUpdateEnabled = false
-var BatchUpdateInterval int
+var (
+	BatchUpdateEnabled  = false
+	BatchUpdateInterval int
+)
 
 var RelayTimeout int // unit is second
 
-var RelayMaxIdleConns int
-var RelayMaxIdleConnsPerHost int
+var (
+	RelayMaxIdleConns        int
+	RelayMaxIdleConnsPerHost int
+)
 
 var GeminiSafetySetting string
 
