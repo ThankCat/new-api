@@ -78,13 +78,14 @@ var (
 		"foxmail.com",
 	}
 )
+
 var EmailLoginAuthServerList = []string{
 	"smtp.sendcloud.net",
 	"smtp.azurecomm.net",
 }
 
 var (
-	DebugEnabled       bool
+	DebugEnabled       bool // 是否开启Debug模式
 	MemoryCacheEnabled bool
 )
 

@@ -50,6 +50,7 @@ func main() {
 		return
 	}
 
+	// 打印项目、版本号、 Debug模式, 这是gin模式
 	common.SysLog("New API " + common.Version + " started")
 	if os.Getenv("GIN_MODE") != "debug" {
 		gin.SetMode(gin.ReleaseMode)
@@ -58,6 +59,7 @@ func main() {
 		common.SysLog("running in debug mode")
 	}
 
+	// defer 关闭数据库连接
 	defer func() {
 		err := model.CloseDB()
 		if err != nil {
